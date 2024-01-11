@@ -8,16 +8,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class HomeController {
+public class VisitedController {
     private final PlaceRepository placeRepository;
 
     @Autowired
-    public HomeController(PlaceRepository placeRepository) {
+    public VisitedController(PlaceRepository placeRepository) {
         this.placeRepository = placeRepository;
     }
 
-    @GetMapping("/")
-    public String home(Model model) {
-        return "home";  // home.html
+    @GetMapping("/visited")
+    public String visited(Model model) {
+        model.addAttribute("visited", placeRepository.findByVisited(true));
+        return "visited"; 
     }
 }
